@@ -22,38 +22,43 @@ namespace Inlamning_3_ra_kod
     {
         public double A, B, C, D, E, F, G, H, X, Y, Z, T;
         public string entry;
-        public string Alph;
-        public string[] saveAlph = new string[8];
+        public string Letter;
+        public string[] saveLetter = new string[8];
         /* CONSTRUCTOR: CStack
          * PURPOSE: create a new stack and init X, Y, Z, T and the text entry
          * PARAMETERS: --
          */
-
         public CStack()
         {
-            A = B = C = D = E = F = G = H = X = Y = Z = T = 0;
+            X = Y = Z = T = 0;
             entry = "";
-            string file_name = @"C:\Users\vikke\Desktop\saved.txt";
-            if (File.Exists(file_name))
+            string filePath = @"C:\Users\vikke\Desktop\saved.txt";
+            if (File.Exists(filePath))
             {
-                string[] fileLines = File.ReadAllLines(file_name);
+                string[] fileLines = File.ReadAllLines(filePath);
                 foreach (string word in fileLines)
                 {
                     string[] items = word.Split(' ');
                     switch (items[0])
                     {
                         case "T": T = double.Parse(items[1]); break;
-                        case "Z": X = double.Parse(items[1]); break;
+                        case "Z": Z = double.Parse(items[1]); break;
                         case "Y": Y = double.Parse(items[1]); break;
-                        case "X": Z = double.Parse(items[1]); break;
+                        case "X": X = double.Parse(items[1]); break;
                         case "A": A = double.Parse(items[1]); break;
+                        case "B": B = double.Parse(items[1]); break;
+                        case "C": C = double.Parse(items[1]); break;
+                        case "D": D = double.Parse(items[1]); break;
+                        case "E": E = double.Parse(items[1]); break;
+                        case "F": F = double.Parse(items[1]); break;
+                        case "G": G = double.Parse(items[1]); break;
+                        case "H": H = double.Parse(items[1]); break;
                         default:
                             break;
                     }
                 }
             }
-        }
-
+    }
         /* METHOD: Exit
          * PURPOSE: called on exit, prepared for saving
          * PARAMETERS: --
@@ -62,21 +67,31 @@ namespace Inlamning_3_ra_kod
         public void Exit()
         {
             string file_name = @"C:\Users\vikke\Desktop\saved.txt";
-
-            string[] writeToFile = new string[5];
-
+            string[] writeToFile = new string[12];
             string stringT = $"T {T}";
-            string stringA = $"A {A}";
             string stringZ = $"Z {Z}";
             string stringY = $"Y {Y}";
             string stringX = $"X {X}";
+            string stringA = $"A {A}";
+            string stringB = $"B {B}";
+            string stringC = $"C {C}";
+            string stringD = $"D {D}";
+            string stringE = $"E {E}";
+            string stringF = $"F {F}";
+            string stringG = $"G {G}";
+            string stringH = $"H {H}";
             writeToFile[0] = stringT;
             writeToFile[1] = stringZ;
             writeToFile[2] = stringY;
             writeToFile[3] = stringX;
             writeToFile[4] = stringA;
-
-            //TBD: kolla så file_name exists
+            writeToFile[5] = stringB;
+            writeToFile[6] = stringC;
+            writeToFile[7] = stringD;
+            writeToFile[8] = stringE;
+            writeToFile[9] = stringF;
+            writeToFile[10] = stringG;
+            writeToFile[11] = stringH;
             File.WriteAllLines(file_name, writeToFile);
         }
         /* METHOD: StackString
@@ -96,16 +111,16 @@ namespace Inlamning_3_ra_kod
          */
         public string VarString()
         {
-            saveAlph[0] = A.ToString();
-            saveAlph[1] = B.ToString();
-            saveAlph[2] = C.ToString();
-            saveAlph[3] = D.ToString();
-            saveAlph[4] = E.ToString();
-            saveAlph[5] = F.ToString();
-            saveAlph[6] = G.ToString();
-            saveAlph[7] = H.ToString();
-            return $"{saveAlph[0]}\n{saveAlph[1]}\n{saveAlph[2]}\n{saveAlph[3]}\n" +
-                   $"{saveAlph[4]}\n{saveAlph[5]}\n{saveAlph[6]}\n{saveAlph[7]}";
+            saveLetter[0] = A.ToString();
+            saveLetter[1] = B.ToString();
+            saveLetter[2] = C.ToString();
+            saveLetter[3] = D.ToString();
+            saveLetter[4] = E.ToString();
+            saveLetter[5] = F.ToString();
+            saveLetter[6] = G.ToString();
+            saveLetter[7] = H.ToString();
+            return $"{saveLetter[0]}\n{saveLetter[1]}\n{saveLetter[2]}\n{saveLetter[3]}\n" +
+                   $"{saveLetter[4]}\n{saveLetter[5]}\n{saveLetter[6]}\n{saveLetter[7]}";
         }
         /* METHOD: SetX
          * PURPOSE: set X with overwrite
@@ -298,8 +313,7 @@ namespace Inlamning_3_ra_kod
          */
         public void SetAddress(string name)
         {
-            Alph = name;
-
+            Letter = name;
         }
         /* METHOD: SetVar
          * PURPOSE: 
@@ -309,7 +323,7 @@ namespace Inlamning_3_ra_kod
          */
         public void SetVar()
         {
-            switch (Alph)
+            switch (Letter)
             {
                 case "A": A = X; break;
                 case "B": B = X; break;
@@ -331,8 +345,19 @@ namespace Inlamning_3_ra_kod
          */
         public void GetVar()
         {
-
+            switch (Letter)
+            {
+                case "A": RollSetX(A); break;
+                case "B": RollSetX(B); break;
+                case "C": RollSetX(C); break;
+                case "D": RollSetX(D); break;
+                case "E": RollSetX(E); break;
+                case "F": RollSetX(F); break;
+                case "G": RollSetX(G); break;
+                case "H": RollSetX(H); break;
+                default:
+                    break;
+            }
         }
-
     }
 }
